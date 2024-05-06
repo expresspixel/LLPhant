@@ -104,7 +104,10 @@ class FileSystemVectorStore extends VectorStoreBase
         if ($jsonData === false) {
             return [];
         }
-
+        if ($jsonData === "") {
+            return [];
+        }
+        
         // Decode the JSON data into an array
         $data = json_decode($jsonData, true, 512, JSON_THROW_ON_ERROR);
         if (! is_array($data)) {
