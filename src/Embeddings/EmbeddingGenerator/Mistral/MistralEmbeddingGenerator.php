@@ -40,7 +40,10 @@ class MistralEmbeddingGenerator implements EmbeddingGeneratorInterface
     public function embedText(string $text): array
     {
         $text = str_replace("\n", ' ', $text);
-
+        $text = mb_convert_encoding($text, 'UTF-8', 'UTF-8');
+        dump($text);
+        usleep(200000);
+        
         $response = $this->client->post('https://api.mistral.ai/v1/embeddings', [
             'body' => json_encode([
                 'model' => $this->getModelName(),
